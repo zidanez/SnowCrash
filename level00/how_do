@@ -1,0 +1,16 @@
+1) find / -user flag00 2>/dev/null
+
+/usr/sbin/john
+/rofs/usr/sbin/john
+
+2) cat /usr/sbin/john
+
+cdiiddwpgswtgt
+
+3) https://rot13.com/ 
+Путем перебора выясняем, что нас итересует ROT11
+Получаем: nottoohardhere - это пароль для юзер flag00
+
+4) su flag00 -> getflag
+x24ti5gi3x0ol2eh4esiuxias - пароль для юзера level01
+
